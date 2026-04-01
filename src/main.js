@@ -2,8 +2,7 @@ import "./style.css";
 import javascriptLogo from "./assets/javascript.svg";
 import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
-import { setupCounter } from "./counter.js";
-
+import { UsersApp } from "./users/users-app";
 document.querySelector("#app").innerHTML = `
 <section id="center">
   <div class="hero">
@@ -15,8 +14,12 @@ document.querySelector("#app").innerHTML = `
     <h1>Get started</h1>
     <p>Edit <code>src/main.js</code> and save to test <code>HMR</code></p>
   </div>
+
+  <div class="card"></div>
 </section>
 
 `;
 
-setupCounter(document.querySelector("#counter"));
+const element = document.querySelector(".card");
+// setupCounter(document.querySelector("#counter"));
+UsersApp(element);
