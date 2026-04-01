@@ -1,0 +1,13 @@
+.button {
+  background-color: rgba(0, 0, 0, 0.348);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 15px 30px;
+}
+
+#current-page {
+  background-color: rgba(0, 0, 0, 0.348);
+  color: white;
+  border-radius: 5px;
+  padding: 7px;
+}
