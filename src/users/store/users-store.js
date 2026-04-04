@@ -21,7 +21,20 @@ const loadPreviousPage = async () => {
   state.users = users;
 };
 
-const onUserChanged = async () => {};
+const onUserChanged = async (updatedUser) => {
+  let wasFound = false;
+  state.users = state.users.map((u) => {
+    if (u.id === updatedUser.id) {
+      wasFound = true;
+      return updatedUser;
+    }
+    return u;
+  });
+
+  if (!wasFound && state.users.length < 10) {
+    state.users.push(updatedUser);
+  }
+};
 
 const reloadPage = async () => {};
 

@@ -6,7 +6,6 @@ import usersStore from "./store/users-store";
 import { saveUser } from "./use-cases/save-user";
 
 export const UsersApp = async (element) => {
-  element.innerHTML = `Loading...`;
   await usersStore.loadNextPage();
 
   const users = usersStore.getUsers();

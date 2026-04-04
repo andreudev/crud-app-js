@@ -1,5 +1,6 @@
 import { userModelToLocalhost } from "../mappers/user-to-localhost.mapper";
 import { User } from "../models/user";
+import { localhostUserToModel } from "../mappers/localhost-user.mapper";
 
 export const saveUser = async (userLike) => {
   const user = new User(userLike);
@@ -7,12 +8,14 @@ export const saveUser = async (userLike) => {
     throw new Error("First name and last name are required");
   }
   const userToSave = userModelToLocalhost(user);
+  let userUpdated;
   if (user.id) {
-    return await updateUser(userToSave);
+    userUpdated = await updateUser(userToSave);
+  } else {
+    userUpdated = await createUser(userToSave);
   }
-
-  const createdUser = await createUser(userToSave);
-  return createdUser;
+  // Map the API response to the User model
+  return localhostUserToModel(userUpdated);
 };
 
 const updateUser = async (user) => {

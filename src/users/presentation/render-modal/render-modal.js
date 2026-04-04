@@ -8,9 +8,12 @@ let modal,
 
 export const showModal = async (id) => {
   if (!modal) return;
-  if (!id) return;
-  loadedUser = {};
   modal.classList.remove("hidden");
+  if (!id) {
+    form?.reset();
+    return;
+  }
+  loadedUser = {};
   const user = await getUserById(id);
   setFormValues(user);
 };
@@ -48,20 +51,18 @@ export const RenderModal = (element, callback) => {
     event.preventDefault();
     const formData = new FormData(form);
     const userLike = { ...loadedUser };
+    // Set all values from form
     for (const [key, value] of formData) {
       if (key === "balance") {
         userLike[key] = parseFloat(value);
         continue;
       }
-
-      if (key === "isActive") {
-        userLike[key] = value === "on";
-        continue;
+      if (key !== "isActive") {
+        userLike[key] = value;
       }
-
-      userLike[key] = value;
     }
-    console.log(userLike);
+
+    userLike.isActive = form.isActive.checked;
     await callback(userLike);
     hideModal();
   });
